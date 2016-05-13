@@ -17,7 +17,8 @@ antecedência da aula em questão. Toda semana serão propostos exercícios, pro
 ### Pré Requisitos ###
 
 * [IDE](https://www.arduino.cc/en/Main/Software) do arduino
-* Drivers
+* Arduino Uno ou Mega 2560
+* Drivers para comunicação Serial-USB
 * Hardware distribuído no primeiro dia de curso
 * [Fritzing](http://fritzing.org/home/)
 
