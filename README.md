@@ -5,7 +5,7 @@ Este repositório contera todo o material de apoio para o curso de arduino.
 ### Arduino prático para aplicações em agronômia ###
 
 * Curso voltado para profissionais e pesquisadores da área de ciências agrárias
-* Duração prevista de 60h
+* Duração de ~ 60h 
 * Versão 1.0
 
 ### Estrutura de pastas ###
