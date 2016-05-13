@@ -1,6 +1,6 @@
 # README #
 
-Este repositório contera todo o material de apoio para o curso de arduino.
+Este repositório conterá todo o material de apoio para o curso de arduino.
 
 ### Arduino prático para aplicações em agronômia ###
 
@@ -11,7 +11,7 @@ Este repositório contera todo o material de apoio para o curso de arduino.
 ### Estrutura de pastas ###
 
 O material de apoio de cada aula do curso estará disponibilizado em sua respectiva pasta com pelo menos um dia de 
-antecedência da aula em questão. Toda semana serão propostos exercícios, projetos e exemplos, estes disponibilzados 
+antecedência da aula em questão. Toda semana serão propostos exercícios, projetos e exemplos, estes disponibilizados 
  na integra neste repositório.
  
 ### Pré Requisitos ###
