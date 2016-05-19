@@ -1,4 +1,4 @@
-//farol_interativo.ino
+//semaforo_pedestre.ino
 
 /*
   __  _       _      ___   ___  _  _    __
@@ -8,13 +8,14 @@
  \_\ |_|\__,_|_.__/ \___/ \___/   |_|   /_/
 */
 
-int carRed = 8;
-int carYellow = 9;
-int carGreen = 10;
-int pedRed = 5;
-int pedGreen = 6;
-int button = 7;
-int crossTime = 5000;
+const int carRed = 8;
+const int carYellow = 9;
+const int carGreen = 10;
+const int pedRed = 5;
+const int pedGreen = 6;
+const int button = 7;
+const int crossTime = 5000;
+
 unsigned long changeTime;
 
 void setup()
@@ -40,12 +41,12 @@ void loop()
 
 void changeLights()
 {
-	digitalWrite(carGreen, LOW); // apaga verde
-	digitalWrite(carYellow, HIGH); // acende amarelo
+	digitalWrite(carGreen, LOW);
+	digitalWrite(carYellow, HIGH);
 	delay(2000);
 
-	digitalWrite(carYellow, LOW); // apaga amarelo
-	digitalWrite(carRed, HIGH); // acende vermelho
+	digitalWrite(carYellow, LOW);
+	digitalWrite(carRed, HIGH);
 	delay(1000);
 
 	digitalWrite(pedRed, LOW);

@@ -10,9 +10,11 @@ Este repositório conterá todo o material de apoio para o curso de arduino.
 
 ### Estrutura de pastas ###
 
-O material de apoio de cada aula do curso estará disponibilizado em sua respectiva pasta com pelo menos um dia de 
+* O material de apoio de cada aula do curso estará disponibilizado em sua respectiva pasta com pelo menos um dia de 
 antecedência da aula em questão. Toda semana serão propostos exercícios, projetos e exemplos, estes disponibilizados 
  na integra neste repositório.
+* A pasta libraries contém as biblietecas necessárias para o curso, copie o seu conteudo para a sua pasta libraries.
+* A pasta notebook contem um arquivo em pdf de referências básicas para programar C/C++ no arduino.
  
 ### Pré Requisitos ###
 
