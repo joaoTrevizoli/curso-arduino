@@ -10,6 +10,8 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
+float lm35dzTempReading(int lm35dzSensorPin);
+
 const int lm35dzPin = A2;
 
 float lm35dzTemp;
@@ -29,10 +31,14 @@ void loop()
 {
 	lm35dzTemp = lm35dzTempReading(lm35dzPin); 
 
+	// Escrita na tela LCD
 	lcd.setCursor(0, 0);
 	lcd.print(lm35dzTemp);
+	lcd.print(" C");
 
-	Serial.println(lm35dzTemp);
+	//Escrita no monitor serial
+	Serial.print(lm35dzTemp);
+	Serial.println(" C");
 
 	delay(2000);
 

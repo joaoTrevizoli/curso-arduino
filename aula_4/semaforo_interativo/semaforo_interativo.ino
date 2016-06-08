@@ -1,12 +1,12 @@
-//semaforo_pedestre.ino
-
-/*
+/* semaforo_pedestre.ino
   __  _       _      ___   ___  _  _    __
  / / | | __ _| |__  ( _ ) / _ \| || |   \ \
 / /  | |/ _` | '_ \ / _ \| | | | || |_   \ \
 \ \  | | (_| | |_) | (_) | |_| |__   _|  / /
  \_\ |_|\__,_|_.__/ \___/ \___/   |_|   /_/
 */
+
+void changeLights();
 
 const int carRed = 8;
 const int carYellow = 9;

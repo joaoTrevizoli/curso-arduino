@@ -1,6 +1,4 @@
-//photoresistor_analog_read.ino
-
-/*
+/* photoresistor_analog_read.ino
   __  _       _      ___   ___  _  _    __
  / / | | __ _| |__  ( _ ) / _ \| || |   \ \
 / /  | |/ _` | '_ \ / _ \| | | | || |_   \ \
@@ -8,12 +6,12 @@
  \_\ |_|\__,_|_.__/ \___/ \___/   |_|   /_/
 */
 
+int readLDR(int pin);
+
 const int ldrPin = A0;
 const int ledPin = 2;
 
 int ldrRead;
-
-int readLDR(int pin);
 
 void setup()
 {

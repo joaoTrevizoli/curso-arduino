@@ -1,6 +1,4 @@
-//led_rgb.ino
-
-/*
+/* led_rgb.ino
   __  _       _      ___   ___  _  _    __
  / / | | __ _| |__  ( _ ) / _ \| || |   \ \
 / /  | |/ _` | '_ \ / _ \| | | | || |_   \ \
@@ -30,9 +28,6 @@ void setup()
 void loop()
 {
 	spectroRGB();
-	analogWrite(RED_PIN, 255);
-	analogWrite(GREEN_PIN, 255);
-	analogWrite(BLUE_PIN, 255);
 	delay(5);
 }
 
@@ -48,9 +43,6 @@ void spectroRGB()
 
 void pulsaCor(int pin, bool acendeApaga)
 {
-
-	
-	
 	if(acendeApaga)
 	{
 		for(int i=0; i<255; i++)
@@ -68,6 +60,5 @@ void pulsaCor(int pin, bool acendeApaga)
 			delay(5);
 	
 		}
-	}
-	
+	}	
 }

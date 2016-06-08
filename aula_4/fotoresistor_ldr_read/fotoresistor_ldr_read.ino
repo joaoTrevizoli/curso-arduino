@@ -1,12 +1,11 @@
-//photoresistor_serial_com.ino
-
-/*
+/* photoresistor_serial_com.ino
   __  _       _      ___   ___  _  _    __
  / / | | __ _| |__  ( _ ) / _ \| || |   \ \
 / /  | |/ _` | '_ \ / _ \| | | | || |_   \ \
 \ \  | | (_| | |_) | (_) | |_| |__   _|  / /
  \_\ |_|\__,_|_.__/ \___/ \___/   |_|   /_/
 */
+
 const int SENSOR = A0; // input serial pin
 
 int val = 0; //sensor reading
