@@ -55,7 +55,6 @@ void loop()
   regiaoIncerteza(lm35dzTemp, corAzul, corVermelha, 30, 25);
   analogWrite(pinoVermelho, corVermelha);
   analogWrite(pinoAzul, corAzul);
-  Serial.println(lm35dzTemp);
   delay(500);
 }
 
@@ -81,8 +80,16 @@ float funcaoPertinencia(float val, float limInferior, float limSuperior)
 void regiaoIncerteza(float temperatura, int &corQuente, int &corFria, \
   float limInferior, float limSuperior)
 {
-  corFria = 255  * funcaoPertinencia(temperatura, limInferior, limSuperior);
-  corQuente =  255 * funcaoPertinencia(temperatura, limSuperior, limInferior);
+  float fuzzyQuente = funcaoPertinencia(temperatura, limInferior, limSuperior);
+  float fuzzyFrio = funcaoPertinencia(temperatura, limSuperior, limInferior);
+  corFria = 255  * fuzzyQuente;
+  corQuente =  255 * fuzzyFrio;
+
+  Serial.print(temperatura);
+  Serial.print(" Esta frio com pertinencia: ");
+  Serial.print(fuzzyFrio);
+  Serial.print(", Esta calor com pertinencia: ");
+  Serial.println(fuzzyQuente);
 }
 
 
