@@ -5,80 +5,95 @@
 \ \  | | (_| | |_) | (_) | |_| |__   _|  / /
  \_\ |_|\__,_|_.__/ \___/ \___/   |_|   /_/
 
+
+Vamos considerar t < 25 C como frio e t > 30 C como quente
+portanto a faixa de incerteza de quente para frio e o intervalo
+30 C e 25 C e o intervalo de incerteza de frio para quente é
+o intervalo de 25 e 30 graus
 */
 
-inline float funcaoPertinencia(float val, float limInferior, float limSuperior);
-void regiaoIncerteza(float temperatura, int &corQunte, int &corFria);
-void representacaoGrafica(int typeQF);
-void representacaoGraficaInterseccao();
+float funcaoPertinencia(float val, float limInferior, float limSuperior);
+void representacaoGrafica(float limInferior, float limSuperior);
+void representacaoGraficaInterseccao(float limInferior, float limSuperior);
+void regiaoIncerteza(float temperatura, int &corQuente, int &corFria, \
+  float limInferior, float limSuperior);
 float lm35dzTempReading(int lm35dzSensorPin);
+
 
 const int pinoVermelho = 9;
 const int pinoVerde = 10;
-const int pinAzul = 11;
+const int pinoAzul = 11;
 const int lm35dzPin = A2;
 
 float lm35dzTemp;
 
-int vermelho;
-int azul;
+int corVermelha;
+int corAzul;
 
 void setup()
 {
   Serial.begin(9600);
   pinMode(pinoVermelho, OUTPUT);
 	pinMode(pinoVerde, OUTPUT);
-	pinMode(pinAzul, OUTPUT);
+	pinMode(pinoAzul, OUTPUT);
 
-  Serial.println( "-----------Conjunto da Temperatura Baixa--------");
-  representacaoGrafica('f');
-  Serial.println( "-----------Conjunto da Temperatura Alta---------");
-  representacaoGrafica('q');
-  Serial.println( "-----------Conjunto da Uniao--------------------");
-  representacaoGraficaInterseccao();
+  Serial.println( "-----------Funcao Temperatura Baixa--------");
+  representacaoGrafica(30, 25);
+  Serial.println( "-------------------------------------------");
+  Serial.println( "-----------Funcao Temperatura Alta---------");
+  representacaoGrafica(25, 30);
+  Serial.println( "-------------------------------------------");
+  Serial.println( "-----------Conjunto da Uniao---------------");
+  representacaoGraficaInterseccao(25, 30);
+  Serial.println( "-------------------------------------------");
+
 }
 
 void loop()
 {
   lm35dzTemp = lm35dzTempReading(lm35dzPin);
-  regiaoIncerteza(lm35dzTemp, vermelho, azul);
+  regiaoIncerteza(lm35dzTemp, corAzul, corVermelha, 30, 25);
+  analogWrite(pinoVermelho, corVermelha);
+  analogWrite(pinoAzul, corAzul);
   Serial.println(lm35dzTemp);
-  delay(1500);
-
+  delay(500);
 }
 
-inline float funcaoPertinencia(float val, float limInferior, float limSuperior)
+float funcaoPertinencia(float val, float limInferior, float limSuperior)
 {
   float resultado;
   if (limInferior >= limSuperior)
+  {
     resultado = (val - limSuperior) / (limInferior - limSuperior);
+  }
   else
-    resultado = -((limSuperior - val)/ (limInferior - limSuperior));
+  {
+    resultado = -((limSuperior - val) / (limInferior - limSuperior));
+  }
+
   if (resultado >= 1)
     return 1;
-  if (resultado <= 0)
+  else if (resultado <= 0)
     return 0;
   return resultado;
-
 }
 
-void regiaoIncerteza(float temperatura, int &corQuente, int &corFria)
+void regiaoIncerteza(float temperatura, int &corQuente, int &corFria, \
+  float limInferior, float limSuperior)
 {
-  corQuente = 255 * funcaoPertinencia(temperatura, 25.0, 30.0);
-  corFria =  255 * funcaoPertinencia(temperatura, 30.0, 25.0);
-
+  corFria = 255  * funcaoPertinencia(temperatura, limInferior, limSuperior);
+  corQuente =  255 * funcaoPertinencia(temperatura, limSuperior, limInferior);
 }
-void representacaoGrafica(int typeQF)
+
+
+void representacaoGrafica(float limInferior, float limSuperior)
 {
   Serial.println("   C |");
   unsigned int grafVal;
 
   for (size_t i = 0; i < 35; i++)
   {
-    if (typeQF == 'q' || typeQF == 'Q')
-      grafVal = 10 * funcaoPertinencia(i, 30.0, 25.0);
-    else
-      grafVal = 10 * funcaoPertinencia(i, 25.0, 30.0);
+    grafVal = 10 * funcaoPertinencia(i, limInferior, limSuperior);
     Serial.print("   ");
     Serial.print(i);
     if (i < 10)
@@ -97,21 +112,21 @@ void representacaoGrafica(int typeQF)
   }
 
 }
-
-
-void representacaoGraficaInterseccao()
+void representacaoGraficaInterseccao(float limInferior, float limSuperior)
 {
   Serial.println("   C |");
-  unsigned int quente;
-  unsigned int frio;
+  unsigned int conjunto1;
+  unsigned int conjunto2;
   unsigned int min;
   for (size_t i = 0; i < 35; i++)
   {
-    quente = 10 * funcaoPertinencia(i, 30.0, 25.0);
-    frio = 10 * funcaoPertinencia(i, 25.0, 30.0);
-    min = quente;
-    if (frio < min)
-      min = frio;
+    // Interseccao
+    conjunto1 = 10 * funcaoPertinencia(i, limInferior, limSuperior);
+    conjunto2 = 10 * funcaoPertinencia(i, limSuperior, limInferior);
+
+    min = conjunto1;
+    if (conjunto2 < min)
+      min = conjunto2;
 
       Serial.print("   ");
       Serial.print(i);
@@ -132,7 +147,6 @@ void representacaoGraficaInterseccao()
   }
 
 }
-
 float lm35dzTempReading(int lm35dzSensorPin)
 {
 	/*
